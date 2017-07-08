@@ -300,6 +300,16 @@ a:focus {
     margin: 0;
 }
 
+.content table {
+    table-layout: fixed;
+    width: 200px;
+}
+
+.content table td, th {
+    border: 1px solid black;
+    width: 100px;
+}
+
 
 /*  ~~~~~ END MAIN CONTENT ~~~~~ */
 

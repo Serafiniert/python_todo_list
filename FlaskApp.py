@@ -13,8 +13,9 @@ def index():
     entries = read_from_db()
     return render_template('home.html', entries=entries)
 
-conn = sqlite3.connect('todo.db')
-c = conn.cursor()
+
+# conn = sqlite3.connect('todo.db')
+# c = conn.cursor()
 
 
 def init_input():
@@ -78,6 +79,8 @@ def init_input():
 
 
 def get_highest_serial():
+    conn = get_db()
+    c = conn.cursor()
     ser = 0
     c.execute('SELECT * FROM todo')
     for row in c.fetchall():
@@ -86,18 +89,28 @@ def get_highest_serial():
 
 
 def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-    return db
+    if not hasattr(g, 'sqlite_db'):
+        conn = sqlite3.connect('todo.db')
+        g.sqlite_db = conn
+    return g.sqlite_db
+
+
+@app.teardown_appcontext
+def close_db(error):
+    if hasattr(g, 'sqlite_db'):
+        g.sqlite_db.close()
 
 
 def create_table():
+    conn = get_db()
+    c = conn.cursor()
     c.execute(
         'CREATE TABLE IF NOT EXISTS todo(serial INTEGER, task TEXT, description TEXT, due TEXT, done TEXT, date TEXT)')
 
 
 def add_todo(task, description, due):
+    conn = get_db()
+    c = conn.cursor()
     serial = get_highest_serial() + 1
 
     unix = time.time()
@@ -113,23 +126,40 @@ def read_from_db():
     if get_highest_serial() == 0:
         flash('Todo-List is empty.' + '\n')
     else:
-
+        conn = get_db()
+        c = conn.cursor()
         c.execute('SELECT * FROM todo')
-        entries = c.fetchall()
+        entries = []
+        for row in c.fetchall():
+            e = {
+                'serial': row[0],
+                'task': row[1],
+                'description': row[2],
+                'due': row[3],
+                'done': row[4],
+                'date': row[5]
+            }
+            entries.append(e)
         return entries
 
 
 def change_done(serial):
+    conn = get_db()
+    c = conn.cursor()
     c.execute("UPDATE todo SET done = 'finished' WHERE serial = ? AND done = 'new'", (serial,))
     conn.commit()
 
 
 def delete(serial):
+    conn = get_db()
+    c = conn.cursor()
     c.execute('DELETE FROM todo WHERE serial = ?', (serial,))
     conn.commit()
 
 
 def get_serial_by_name(name):
+    conn = get_db()
+    c = conn.cursor()
     c.execute('SELECT * FROM todo WHERE task = ?', (name,))
     for row in c.fetchall():
         return row[0]
@@ -139,12 +169,16 @@ def search(name):
     if get_highest_serial() == 0:
         print('Todo-List is empty.' + '\n')
     else:
+        conn = get_db()
+        c = conn.cursor()
         c.execute('SELECT * FROM todo WHERE task = ?', (name,))
         [print(row) for row in c.fetchall()]
         print('\n')
 
 
 def fill_example_data():
+    conn = get_db()
+    c = conn.cursor()
     c.execute('SELECT * FROM todo')
     for row in c.fetchall():
         delete(row[0])
@@ -157,11 +191,11 @@ def fill_example_data():
     read_from_db()
 
 
-create_table()
-#init_input()
+#create_table()
+# init_input()
 
 if __name__ == '__main__':
     app.run(debug=True)
 
-c.close()
-conn.close()
+# c.close()
+# conn.close()
