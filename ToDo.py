@@ -33,6 +33,7 @@ def initialize():
     db.create_tables([ToDo], safe=True)
 
 
+    
 def view_entries(index, entries, single_entry):
     """"View to-do list"""
     clear()
