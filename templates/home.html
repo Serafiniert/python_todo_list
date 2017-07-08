@@ -1,1 +1,48 @@
-HOMEY
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <title>Grundlagen Webprogrammierung</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Tanyel Stoyloff / s0556435, Finn Christians / s0556022">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+<header>
+    <section id="header">
+        <div id="heading">
+            <h1>Java-Grundlagen</h1>
+            <h2>Java-Spiel</h2>
+        </div>
+    </section>
+</header>
+<section class="content">
+    <h3>Stein, Schere, Papier</h3>
+    <h4>Anleitung</h4>
+    <p><strong>Stein, Schere, Papier</strong> (auch bekannt unter Schnick, Schnack, Schnuck) ist ein Spiel bei dem man
+        sich zwischen drei verschiedenen Handzeichen entscheidet:</p>
+    <ul>
+        <li><strong>Stein</strong> schlägt Schere</li>
+        <li><strong>Schere</strong> schlägt Papier</li>
+        <li><strong>Papier</strong> schlägt Stein</li>
+        <li>Gleiche Handzeichen bedeuten unentschieden</li>
+    </ul>
+    <p>Wähle zuerst mit einem Klick auf den entsprechenden Button aus welches Handzeichen du benutzen möchtest.
+        Anschließend Starte das Spiel. Dein Gegner wird sein Handzeichen zufällig wählen.</p>
+    <div class="gamebox">
+        <button id="rock">Stein</button>
+        <button id="scissors">Schere</button>
+        <button id="paper">Papier</button>
+        <div id="choicebox">1. Wähle deine Hand</div>
+        <button id="start">Erst wählen</button>
+        <div id="resultbox">2. Starte das Spiel</div>
+    </div>
+    <img src="static/images/spiel.png" alt="Stein, Schere, Papier">
+</section>
+<footer>&copy; 2017 | Tanyel Stoyloff &amp; Finn Christians | HTW</footer>
+
+</body>
+
+</html>
