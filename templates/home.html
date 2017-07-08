@@ -24,10 +24,8 @@
     <p><strong>Stein, Schere, Papier</strong> (auch bekannt unter Schnick, Schnack, Schnuck) ist ein Spiel bei dem man
         sich zwischen drei verschiedenen Handzeichen entscheidet:</p>
     <ul>
-        <li><strong>Stein</strong> schlägt Schere</li>
-        <li><strong>Schere</strong> schlägt Papier</li>
-        <li><strong>Papier</strong> schlägt Stein</li>
-        <li>Gleiche Handzeichen bedeuten unentschieden</li>
+        {% for entry in entries %} <li> {{ entry.serial }} </li>
+
     </ul>
     <p>Wähle zuerst mit einem Klick auf den entsprechenden Button aus welches Handzeichen du benutzen möchtest.
         Anschließend Starte das Spiel. Dein Gegner wird sein Handzeichen zufällig wählen.</p>

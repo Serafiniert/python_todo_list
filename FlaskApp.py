@@ -1,15 +1,17 @@
 import sqlite3
 import time
 import datetime
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, g
 
 app = Flask(__name__)
+
+DATABASE = 'todo.db'
 
 
 @app.route('/')
 def index():
-    return render_template('home.html')
-
+    entries = read_from_db()
+    return render_template('home.html', entries=entries)
 
 conn = sqlite3.connect('todo.db')
 c = conn.cursor()
@@ -83,6 +85,13 @@ def get_highest_serial():
     return ser
 
 
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+    return db
+
+
 def create_table():
     c.execute(
         'CREATE TABLE IF NOT EXISTS todo(serial INTEGER, task TEXT, description TEXT, due TEXT, done TEXT, date TEXT)')
@@ -102,12 +111,12 @@ def add_todo(task, description, due):
 
 def read_from_db():
     if get_highest_serial() == 0:
-        print('Todo-List is empty.' + '\n')
+        flash('Todo-List is empty.' + '\n')
     else:
+
         c.execute('SELECT * FROM todo')
-        for row in c.fetchall():
-            print(row)
-        print('\n')
+        entries = c.fetchall()
+        return entries
 
 
 def change_done(serial):
@@ -149,9 +158,10 @@ def fill_example_data():
 
 
 create_table()
-init_input()
-c.close()
-conn.close()
+#init_input()
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+c.close()
+conn.close()
