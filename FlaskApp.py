@@ -12,8 +12,15 @@ DATABASE = 'todo.db'
 def index():
     create_table()
     entries = read_from_db()
-    if entries == None:
-        return render_template('home.html')
+
+    return render_template('home.html', entries=entries)
+
+
+@app.route('/search_by_id', methods=['POST'])
+def search():
+    serial = request.form['search']
+    entries = search(serial)
+    print(entries)
     return render_template('home.html', entries=entries)
 
 
@@ -51,7 +58,7 @@ def delete():
 
     return redirect('/')
 
-
+'''
 def init_input():
     print('What do you want to do:' + '\n' +
           '1: Show all tasks' + '\n' +
@@ -110,6 +117,7 @@ def init_input():
         fill_example_data()
     print(50 * '#' + '\n')
     init_input()
+'''
 
 
 def get_highest_serial():
@@ -194,24 +202,32 @@ def delete(serial):
     c.execute('DELETE FROM todo WHERE serial = ?', (serial,))
     conn.commit()
 
-
-def get_serial_by_name(name):
+'''
+def get_serial_by_id(serial):
     conn = get_db()
     c = conn.cursor()
-    c.execute('SELECT * FROM todo WHERE task = ?', (name,))
+    c.execute('SELECT * FROM todo WHERE serial = ?', (serial,))
     for row in c.fetchall():
         return row[0]
+'''
 
 
-def search(name):
-    if get_highest_serial() == 0:
-        print('Todo-List is empty.' + '\n')
-    else:
-        conn = get_db()
-        c = conn.cursor()
-        c.execute('SELECT * FROM todo WHERE task = ?', (name,))
-        [print(row) for row in c.fetchall()]
-        print('\n')
+def search(serial):
+    conn = get_db()
+    c = conn.cursor()
+    c.execute('SELECT * FROM todo WHERE serial = ?', (serial,))
+    entries = []
+    for row in c.fetchall():
+        e = {
+            'serial': row[0],
+            'task': row[1],
+            'description': row[2],
+            'due': row[3],
+            'done': row[4],
+            'date': row[5]
+        }
+        entries.append(e)
+    return entries
 
 
 def fill_example_data():
@@ -228,9 +244,6 @@ def fill_example_data():
     print('Example Todo-List created.')
     read_from_db()
 
-
-#fill_example_data()
-# init_input()
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'

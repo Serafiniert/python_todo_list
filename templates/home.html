@@ -41,6 +41,14 @@
     <form action="/create_example_db" method="post">
         <input type="submit" value="Create Example DB">
     </form>
+    <form action="/">
+        <input type="submit" value="Show all Todo-items">
+    </form>
+
+    <form action="/search_by_id" method="post">
+        <input type="submit" value="Search Item">
+        <input type="text" name="search" id="search" placeholder="Todo-ID" required><br>
+    </form>
     <table>
         <tr><th>Todo-ID</th>
             <th>Task</th>
