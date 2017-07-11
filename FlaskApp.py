@@ -1,7 +1,7 @@
 import sqlite3
 import time
 import datetime
-from flask import Flask, render_template, flash, g
+from flask import Flask, render_template, flash, g, request, redirect
 
 app = Flask(__name__)
 
@@ -10,12 +10,46 @@ DATABASE = 'todo.db'
 
 @app.route('/')
 def index():
+    create_table()
     entries = read_from_db()
+    if entries == None:
+        return render_template('home.html')
     return render_template('home.html', entries=entries)
 
 
-# conn = sqlite3.connect('todo.db')
-# c = conn.cursor()
+@app.route('/add', methods=['POST'])
+def add():
+    task = request.form['task']
+    description = request.form['description']
+    due = request.form['due']
+
+    add_todo(task, description, due)
+
+    return redirect('/')
+
+
+@app.route('/complete')
+def complete():
+    serial = request.args['serial_to_complete']
+    state = request.args['done_to_complete']
+    change_done(serial, state)
+    return redirect('/')
+
+
+@app.route('/create_example_db', methods=['POST'])
+def create_example_db():
+    fill_example_data()
+
+    return redirect('/')
+
+
+@app.route('/delete')
+def delete():
+    serial = request.args['serial_to_delete']
+    print(serial)
+    delete(serial)
+
+    return redirect('/')
 
 
 def init_input():
@@ -115,7 +149,7 @@ def add_todo(task, description, due):
 
     unix = time.time()
     done = 'new'
-    date = str(datetime.datetime.fromtimestamp(unix).strftime('%d.%m.%Y %H:%M'))
+    date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M'))
 
     c.execute("INSERT INTO todo(serial, task, description, due, done, date) VALUES (?, ?, ?, ?, ?, ?)",
               (serial, task, description, due, done, date))
@@ -143,16 +177,20 @@ def read_from_db():
         return entries
 
 
-def change_done(serial):
+def change_done(serial, state):
     conn = get_db()
     c = conn.cursor()
-    c.execute("UPDATE todo SET done = 'finished' WHERE serial = ? AND done = 'new'", (serial,))
+    if state == 'new':
+        c.execute("UPDATE todo SET done = 'finished' WHERE serial = ?", (serial,))
+    else:
+        c.execute("UPDATE todo SET done = 'new' WHERE serial = ?", (serial,))
     conn.commit()
 
 
 def delete(serial):
     conn = get_db()
     c = conn.cursor()
+
     c.execute('DELETE FROM todo WHERE serial = ?', (serial,))
     conn.commit()
 
@@ -182,20 +220,18 @@ def fill_example_data():
     c.execute('SELECT * FROM todo')
     for row in c.fetchall():
         delete(row[0])
-    add_todo("Einkaufen", "kein Essen da!", "06.07.2017")
-    add_todo("Sport", "zu fett", "20.07.2018")
-    add_todo("Praktikum finden", "muss Arbeiten", "01.10.2017")
-    add_todo("Japanisch", "Konnichiwa", "04.08.2017")
-    add_todo("Python", "Python ist toll!", "17.07.2017")
+    add_todo("Einkaufen", "kein Essen da!", "2017-07-06")
+    add_todo("Sport", "zu fett", "2018-07-20")
+    add_todo("Praktikum finden", "muss Arbeiten", "2017-10-01")
+    add_todo("Japanisch", "Konnichiwa", "2017-08-04")
+    add_todo("Python", "Python ist toll!", "2017-07-17")
     print('Example Todo-List created.')
     read_from_db()
 
 
-#create_table()
+#fill_example_data()
 # init_input()
 
 if __name__ == '__main__':
+    app.secret_key = 'super secret key'
     app.run(debug=True)
-
-# c.close()
-# conn.close()

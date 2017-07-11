@@ -22,25 +22,65 @@
     <h3>Stein, Schere, Papier</h3>
     <p><strong>Stein, Schere, Papier</strong> (auch bekannt unter Schnick, Schnack, Schnuck) ist ein Spiel bei dem man
         sich zwischen drei verschiedenen Handzeichen entscheidet:</p>
+
+    <form action="/add" method="post">
+
+        <label for="task">Task</label>
+        <input type="text" name="task" id="task" placeholder="Mustertask" required><br>
+
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" placeholder="What to do" required><br>
+
+        <label for="due">Due</label>
+        <input type="date" name="due" id="due" placeholder="YYYY-MM-DD" required><br>
+
+
+        <input type="submit" value="Add">
+    </form>
+
+    <form action="/create_example_db" method="post">
+        <input type="submit" value="Create Example DB">
+    </form>
     <table>
-        <tr><th>Serial</th>
-        <th>Task</th>
-        <th>Description</th>
-        <th>Due</th>
-        <th>Due</th>
-        <th>Date</th></tr>
+        <tr><th>Todo-ID</th>
+            <th>Task</th>
+            <th>Description</th>
+            <th>Due to</th>
+            <th>Create Date</th>
+            <th>Done</th>
+            <th>Remove</th>
+        </tr>
         {% for entry in entries %} <tr>
+
         <td> {{ entry.serial }} </td>
         <td> {{ entry.task }} </td>
         <td> {{ entry.description }} </td>
         <td> {{ entry.due }} </td>
-        <td> {{ entry.done }} </td>
         <td> {{ entry.date }} </td>
+        <td><form action="/complete">
+            <input type="hidden" value="{{entry.done}}" name="done_to_complete">
+            <input type="hidden" value="{{entry.serial}}" name="serial_to_complete">
+            <input type="submit" value="{{entry.done}}">
+        </form>
+        </td>
+        <td><form action="/delete">
+            <input type=hidden value="{{entry.serial}}" name="serial_to_delete">
+            <input type="submit" value="Remove">
+        </form></td>
 
     </tr>
         {% endfor %}
-
     </table>
+
+
+
+
+
+
+
+
+
+
     <p>Wähle zuerst mit einem Klick auf den entsprechenden Button aus welches Handzeichen du benutzen möchtest.
         Anschließend Starte das Spiel. Dein Gegner wird sein Handzeichen zufällig wählen.</p>
     <div class="gamebox">
