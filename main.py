@@ -60,10 +60,7 @@ def complete():
 def delete():
     # requesting the hidden input to get the serial by pressing the "Remove"-Button in the same row
     serial = request.args['serial_to_delete']
-<<<<<<< HEAD:FlaskApp.py
-=======
     print('Removed Todo-ID entry' + serial)
->>>>>>> d3235a7e3daf98602c69fc1892d27d156617cdd6:main.py
     delete(serial)
 
     return redirect('/')
@@ -185,10 +182,10 @@ def change_state(serial, state):
     c = conn.cursor()
     if state == 'new':
         c.execute("UPDATE todo SET state = 'finished' WHERE serial = ?", (serial,))
-        print('Item Number ' + serial + ' is now finished.')
+        print('Item Number ' + str(serial) + ' is now finished.')
     else:
         c.execute("UPDATE todo SET state = 'new' WHERE serial = ?", (serial,))
-        print('Item Number ' + serial + ' is not finished anymore.')
+        print('Item Number ' + str(serial) + ' is not finished anymore.')
 
     conn.commit()
 
@@ -198,7 +195,7 @@ def delete(serial):
     conn = get_db()
     c = conn.cursor()
     c.execute('DELETE FROM todo WHERE serial = ?', (serial,))
-    print('Item Number ' + serial + ' got deleted.')
+    print('Item Number ' + str(serial) + ' got deleted.')
     conn.commit()
 
 
