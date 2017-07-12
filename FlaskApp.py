@@ -60,7 +60,6 @@ def complete():
 def delete():
     # requesting the hidden input to get the serial by pressing the "Remove"-Button in the same row
     serial = request.args['serial_to_delete']
-    print(serial)
     delete(serial)
 
     return redirect('/')
@@ -86,6 +85,7 @@ def create_table():
     c = conn.cursor()
     c.execute(
         'CREATE TABLE IF NOT EXISTS todo(serial INTEGER, task TEXT, description TEXT, due TEXT, state TEXT, date TEXT)')
+    print('Table was successfully created.')
 
 
 # function that returns all database entries as a dictionary
@@ -136,6 +136,7 @@ def add_todo(task, description, due):
     # inserts calculated values and input values into the table
     c.execute("INSERT INTO todo(serial, task, description, due, state, date) VALUES (?, ?, ?, ?, ?, ?)",
               (serial, task, description, due, state, date))
+    print('Item was successfully added.')
     conn.commit()
 
 
@@ -180,8 +181,11 @@ def change_state(serial, state):
     c = conn.cursor()
     if state == 'new':
         c.execute("UPDATE todo SET state = 'finished' WHERE serial = ?", (serial,))
+        print('Item Number ' + serial + ' is now finished.')
     else:
         c.execute("UPDATE todo SET state = 'new' WHERE serial = ?", (serial,))
+        print('Item Number ' + serial + ' is not finished anymore.')
+
     conn.commit()
 
 
@@ -190,6 +194,7 @@ def delete(serial):
     conn = get_db()
     c = conn.cursor()
     c.execute('DELETE FROM todo WHERE serial = ?', (serial,))
+    print('Item Number ' + serial + ' got deleted.')
     conn.commit()
 
 
