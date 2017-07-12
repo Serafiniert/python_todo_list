@@ -19,7 +19,7 @@
     </section>
 </header>
 <section class="content">
-    <p>Please read the instructions at the bottom of this page before you start using the Todo-List.</p>
+    <p>Please read the <a href="#instruction">instructions</a> at the bottom of this page before you start using the Todo-List.</p>
     <form action="/add" method="post" class="formular" name="AddForm">
         <fieldset>
             <legend>Add a new task to your Todo-List</legend>
@@ -76,7 +76,7 @@
     </tr>
         {% endfor %}
     </table>
-    <h3>The Todo-List's functionality:</h3>
+    <h3 id="instruction">The Todo-List's functionality:</h3>
     <ul>
         <li><strong>Add: </strong>All form fields for this button are required in order to add a new item to your Todo-List. The <i>Todo-ID</i> and the <i>Create Date</i> is generated automatically</li>
         <li><strong>Create Example Todo-List: </strong>This handy button will create a new example Todo-List. <strong><i>Caution! This function will override the current Todo-List without warning!</i></strong></li>
