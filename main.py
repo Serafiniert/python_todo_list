@@ -60,7 +60,7 @@ def complete():
 def delete():
     # requesting the hidden input to get the serial by pressing the "Remove"-Button in the same row
     serial = request.args['serial_to_delete']
-    print(serial)
+    print('Removed Todo-ID entry' + serial)
     delete(serial)
 
     return redirect('/')
@@ -131,7 +131,7 @@ def add_todo(task, description, due):
 
     # date saved in format YYYY-MM-DD Hour:Min
     unix = time.time()
-    date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M Uhr'))
+    date = str(datetime.datetime.fromtimestamp(unix).strftime("%Y-%m-%d %H:%M o'clock"))
 
     # inserts calculated values and input values into the table
     c.execute("INSERT INTO todo(serial, task, description, due, state, date) VALUES (?, ?, ?, ?, ?, ?)",
@@ -165,11 +165,11 @@ def fill_example_data():
     c.execute('SELECT * FROM todo')
     for row in c.fetchall():
         delete(row[0])
-    add_todo("Einkaufen", "Kein Essen da!", "2017-07-06")
-    add_todo("Sport", "Fit werden", "2018-07-20")
-    add_todo("Praktikum finden", "Adieu Deutschland", "2017-10-01")
-    add_todo("Japanisch", "Konnichiwa", "2017-08-04")
-    add_todo("Python", "Python ist toll!", "2017-07-17")
+    add_todo("Shopping", "No food left!", "2017-07-06")
+    add_todo("Fitness", "Get ripped", "2018-07-20")
+    add_todo("Internship", "Adieu Germany", "2017-10-01")
+    add_todo("Japanese", "Konnichiwa", "2017-08-04")
+    add_todo("Python", "Python is awesome!", "2017-07-17")
     print('Example Todo-List created.')
     read_from_db()
 
