@@ -165,9 +165,9 @@ def fill_example_data():
     c.execute('SELECT * FROM todo')
     for row in c.fetchall():
         delete(row[0])
-    add_todo("Einkaufen", "kein Essen da!", "2017-07-06")
-    add_todo("Sport", "zu fett", "2018-07-20")
-    add_todo("Praktikum finden", "muss Arbeiten", "2017-10-01")
+    add_todo("Einkaufen", "Kein Essen da!", "2017-07-06")
+    add_todo("Sport", "Fit werden", "2018-07-20")
+    add_todo("Praktikum finden", "Adieu Deutschland", "2017-10-01")
     add_todo("Japanisch", "Konnichiwa", "2017-08-04")
     add_todo("Python", "Python ist toll!", "2017-07-17")
     print('Example Todo-List created.')
