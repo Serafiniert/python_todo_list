@@ -109,13 +109,28 @@ a:focus {
     margin-bottom: 0.5rem;
 }
 
-.content form{
-    display: inline;
+.content #formfield{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.content #formfield form {
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.content #buttonform{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
 }
 
 .content .formular fieldset {
+
     border: 1px solid #5382A1;
-    margin: 10px auto;
+    margin: 10px 0;
     padding: 5px 15px;
 }
 
@@ -126,7 +141,6 @@ a:focus {
 .content .formular label,
 .content .formular input,
 .content .formular textarea {
-    display: inline;
     margin-right: 5px;
 }
 

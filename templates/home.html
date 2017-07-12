@@ -20,35 +20,39 @@
 </header>
 <section class="content">
     <p>Please read the <a href="#instruction">instructions</a> at the bottom of this page before you start using the Todo-List.</p>
-    <form action="/add" method="post" class="formular" name="AddForm">
-        <fieldset>
-            <legend>Add a new task to your Todo-List</legend>
-            <label for="task">Task</label>
-            <input type="text" name="task" id="task" placeholder="What is your task?" required>
+    <div id="formfield">
+        <form action="/add" method="post" class="formular" name="AddForm">
+            <fieldset>
+                <legend>Add a new task to your Todo-List</legend>
+                <label for="task">Task</label>
+                <input type="text" name="task" id="task" placeholder="What is your task?" required>
 
-            <label for="description">Description</label>
-            <input type="text" name="description" id="description" placeholder="Describe your task shortly." required>
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description" placeholder="Describe your task shortly." required>
 
-            <label for="due">Due</label>
-            <input type="date" name="due" id="due" placeholder="YYYY-MM-DD" required>
+                <label for="due">Due</label>
+                <input type="date" name="due" id="due" placeholder="YYYY-MM-DD" required>
 
-            <input type="submit" value="Add">
-        </fieldset>
-    </form>
-    <form action="/search_by_id" method="post"  class="formular" name="SearchForm">
-        <fieldset>
-            <legend>Search for a specific task in your List</legend>
-            <input type="text" name="search" id="search" placeholder="Todo-ID" required>
+                <input type="submit" value="Add">
+            </fieldset>
+        </form>
+        <form action="/search_by_id" method="post"  class="formular" name="SearchForm">
+            <fieldset>
+                <legend>Search for a specific task in your List</legend>
+                <input type="text" name="search" id="search" placeholder="Todo-ID" required>
 
-            <input type="submit" value="Search Item">
-        </fieldset>
-    </form>
-    <form action="/"  class="formular">
-        <input type="submit" value="Show complete Todo-List">
-    </form>
-    <form action="/create_example_db" method="post" class="formular">
-        <input type="submit" value="Create Example Todo-List">
-    </form>
+                <input type="submit" value="Search Item">
+            </fieldset>
+        </form>
+        <div id="buttonform">
+            <form action="/"  class="formular">
+                <input type="submit" value="Show complete Todo-List">
+            </form>
+            <form action="/create_example_db" method="post" class="formular">
+                <input type="submit" value="Create Example Todo-List">
+            </form>
+        </div>
+    </div>
     <table>
         <tr><th>Todo-ID</th>
             <th>Task</th>
