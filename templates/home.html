@@ -10,99 +10,78 @@
 </head>
 
 <body>
-<header>
-    <section id="header">
-        <div id="heading">
-            <h1>Informatik 3</h1>
-            <h2>Todo-List</h2>
-        </div>
-    </section>
-</header>
-<section class="content">
-    <h3>Stein, Schere, Papier</h3>
-    <p><strong>Stein, Schere, Papier</strong> (auch bekannt unter Schnick, Schnack, Schnuck) ist ein Spiel bei dem man
-        sich zwischen drei verschiedenen Handzeichen entscheidet:</p>
+    <header>
+        <section id="header">
+            <div id="heading">
+                <h1>Informatik 3</h1>
+                <h2>Todo-List</h2>
+            </div>
+        </section>
+    </header>
+    <section class="content">
+        <p>Please read the instructions at the bottom of this page before you start using the Todo-List.</p>
+        <form action="/add" method="post">
+            <label for="task">Task</label>
+            <input type="text" name="task" id="task" placeholder="Mustertask" required><br>
 
-    <form action="/add" method="post">
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" placeholder="What to do" required><br>
 
-        <label for="task">Task</label>
-        <input type="text" name="task" id="task" placeholder="Mustertask" required><br>
+            <label for="due">Due</label>
+            <input type="date" name="due" id="due" placeholder="YYYY-MM-DD" required><br>
 
-        <label for="description">Description</label>
-        <input type="text" name="description" id="description" placeholder="What to do" required><br>
-
-        <label for="due">Due</label>
-        <input type="date" name="due" id="due" placeholder="YYYY-MM-DD" required><br>
-
-
-        <input type="submit" value="Add">
-    </form>
-
-    <form action="/create_example_db" method="post">
-        <input type="submit" value="Create Example DB">
-    </form>
-    <form action="/">
-        <input type="submit" value="Show all Todo-items">
-    </form>
-
-    <form action="/search_by_id" method="post">
-        <input type="submit" value="Search Item">
-        <input type="text" name="search" id="search" placeholder="Todo-ID" required><br>
-    </form>
-    <table>
-        <tr><th>Todo-ID</th>
-            <th>Task</th>
-            <th>Description</th>
-            <th>Due to</th>
-            <th>Create Date</th>
-            <th>Done</th>
-            <th>Remove</th>
-        </tr>
-        {% for entry in entries %} <tr>
-
-        <td> {{ entry.serial }} </td>
-        <td> {{ entry.task }} </td>
-        <td> {{ entry.description }} </td>
-        <td> {{ entry.due }} </td>
-        <td> {{ entry.date }} </td>
-        <td><form action="/complete">
-            <input type="hidden" value="{{entry.done}}" name="done_to_complete">
-            <input type="hidden" value="{{entry.serial}}" name="serial_to_complete">
-            <input type="submit" value="{{entry.done}}">
+            <input type="submit" value="Add">
         </form>
-        </td>
-        <td><form action="/delete">
-            <input type=hidden value="{{entry.serial}}" name="serial_to_delete">
-            <input type="submit" value="Remove">
-        </form></td>
 
-    </tr>
-        {% endfor %}
-    </table>
+        <form action="/create_example_db" method="post">
+            <input type="submit" value="Create Example Todo-List">
+        </form>
+        <form action="/">
+            <input type="submit" value="Show complete Todo-List">
+        </form>
 
-
-
-
-
-
-
-
-
-
-    <p>Wähle zuerst mit einem Klick auf den entsprechenden Button aus welches Handzeichen du benutzen möchtest.
-        Anschließend Starte das Spiel. Dein Gegner wird sein Handzeichen zufällig wählen.</p>
-    <div class="gamebox">
-        <button id="rock">Stein</button>
-        <button id="scissors">Schere</button>
-        <button id="paper">Papier</button>
-        <div id="choicebox">1. Wähle deine Hand</div>
-        <button id="start">Erst wählen</button>
-        <div id="resultbox">2. Starte das Spiel</div>
-    </div>
-    <img src="static/images/spiel.png" alt="Stein, Schere, Papier">
-</section>
-<footer>&copy; 2017 | Tanyel Stoyloff &amp; Finn Christians | HTW</footer>
-
+        <form action="/search_by_id" method="post">
+            <input type="submit" value="Search Item">
+            <input type="text" name="search" id="search" placeholder="Todo-ID" required><br>
+        </form>
+        <table>
+            <tr><th>Todo-ID</th>
+                <th>Task</th>
+                <th>Description</th>
+                <th>Due to</th>
+                <th>Create Date</th>
+                <th>Done</th>
+                <th>Remove</th>
+            </tr>{% for entry in entries %}<tr>
+            <td> {{ entry.serial }} </td>
+            <td> {{ entry.task }} </td>
+            <td> {{ entry.description }} </td>
+            <td> {{ entry.due }} </td>
+            <td> {{ entry.date }} </td>
+            <td><form action="/complete">
+                <input type="hidden" value="{{entry.done}}" name="done_to_complete">
+                <input type="hidden" value="{{entry.serial}}" name="serial_to_complete">
+                <input type="submit" value="{{entry.done}}">
+            </form>
+            </td>
+            <td><form action="/delete">
+                <input type=hidden value="{{entry.serial}}" name="serial_to_delete">
+                <input type="submit" value="Remove">
+            </form></td>
+        </tr>
+            {% endfor %}
+        </table>
+        <h3>The Todo-List's functionality:</h3>
+        <ul>
+            <li><strong>Add: </strong>All form fields for this button are required in order to add a new item to your Todo-List. The <i>Todo-ID</i> and the <i>Create Date</i> is generated automatically</li>
+            <li><strong>Create Example Todo-List: </strong>This handy button will create a new example Todo-List. <strong><i>Caution! This function will override the current Todo-List without warning!</i></strong></li>
+            <li><strong>Show complete Todo-List: </strong>This will allow you to see the complete Todo-List again, if you narrowed it down with a search beforehand.</li>
+            <li><strong>Search Item: </strong>If you input a <i>Todo-ID</i> of your List the function will filter the item out. If you enter an invalid value you will not get any results.</li>
+            <li><strong>New / Finished: </strong>Change the status of your task. <i>new</i> means the item is not completed yet. New items start in this state. Change the state to <i>finished</i> to mark your task as such. Click multiple times to change the status back and forth.</li>
+            <li><strong>Remove: </strong>This will remove the task from the Todo-List. <strong><i>You cannot undo this.</i></strong></li>
+        </ul>
+        <p>This will complete the instructions. Have fun with keeping your life in order.</p>
+    </section>
+    <footer>&copy; 2017 | Tanyel Stoyloff &amp; Finn Christians | HTW</footer>
 </body>
-
 </html>

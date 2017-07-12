@@ -58,67 +58,6 @@ def delete():
 
     return redirect('/')
 
-'''
-def init_input():
-    print('What do you want to do:' + '\n' +
-          '1: Show all tasks' + '\n' +
-          '2: Search and/or complete a task' + '\n' +
-          '3: Add a new task' + '\n' +
-          '4: Delete a task' + '\n' +
-          '5: Exit the Todo-List' + '\n' +
-          '6: Create sample Todo-List' + '\n')
-
-    choice = input('Please choose a number (1-6) ')
-    print("You've selected: " + choice)
-
-    if choice == '1':
-        read_from_db()
-
-    elif choice == '2':
-        search_choice = input('What task do you want to look at? ')
-        search(search_choice)
-        change_done_choice = input('Is this task finished? Answer with yes or no ')
-
-        if change_done_choice == 'yes':
-            get_serial_by_name(search_choice)
-            change_done(get_serial_by_name(search_choice))
-            print('The task ' + search_choice + ' is now set to finished.')
-            delete_choice = input('Do you want to delete the task? Answer with yes or no ')
-
-            if delete_choice == 'yes':
-                print('The task' + search_choice + ' is now deleted.')
-                delete(get_serial_by_name(search_choice))
-
-            else:
-                print('Okay then!')
-
-        else:
-            print('Okay good luck with your task!')
-
-    elif choice == '3':
-        task = input("Please enter the task's name: ")
-        description = input("Please enter its description: ")
-        due = input("Please enter the date its due: DD.MM.YYYY ")
-        add_todo(task, description, due)
-        print('A new task has been entered.' + '\n' + 'Here is your entry.')
-        search(task)
-
-    elif choice == '4':
-        read_from_db()
-        del_choice = input('What task do you want to delete? Serial required ')
-        delete(del_choice)
-        print('The ' + del_choice + '. entry has been successfully deleted.')
-
-    elif choice == '5':
-        print('Bye')
-        return
-
-    elif choice == '6':
-        fill_example_data()
-    print(50 * '#' + '\n')
-    init_input()
-'''
-
 
 def get_highest_serial():
     conn = get_db()
@@ -157,7 +96,7 @@ def add_todo(task, description, due):
 
     unix = time.time()
     done = 'new'
-    date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M'))
+    date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M Uhr'))
 
     c.execute("INSERT INTO todo(serial, task, description, due, done, date) VALUES (?, ?, ?, ?, ?, ?)",
               (serial, task, description, due, done, date))
@@ -201,15 +140,6 @@ def delete(serial):
 
     c.execute('DELETE FROM todo WHERE serial = ?', (serial,))
     conn.commit()
-
-'''
-def get_serial_by_id(serial):
-    conn = get_db()
-    c = conn.cursor()
-    c.execute('SELECT * FROM todo WHERE serial = ?', (serial,))
-    for row in c.fetchall():
-        return row[0]
-'''
 
 
 def search(serial):

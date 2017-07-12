@@ -42,16 +42,13 @@ a:focus {
     position: relative;
     width: 100%;
     margin-top: 20px;
-    overflow: hidden;
-    background-image: url('images/header.jpg') no-repeat 40% 72%;
-    background-size: cover;
     display: flex;
 }
 
 #header #heading {
     flex-direction: column;
     align-self: flex-end;
-    color: #fff;
+    color: #5382A1;
     margin: 0 auto;
     max-width: 768px;
     width: 100%;
@@ -60,7 +57,7 @@ a:focus {
 #header h1,
 #header h2 {
     margin: 0;
-    text-shadow: 1.5px 1.5px rgba(0, 0, 0, .5);
+    text-shadow: 1.5px 1.5px rgba(255, 255, 255, .5);
 }
 
 #header h1 {
@@ -74,77 +71,6 @@ a:focus {
 
 
 /*  ~~~~~ END HEADER ~~~~~ */
-
-
-/*  ~~~~~ NAVI ~~~~~ */
-
-#nav {
-    width: 100%;
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    background: #5382A1;
-}
-
-#nav ul {
-    padding: 0;
-    margin: 0;
-    width: 768px;
-    margin: 0 auto;
-}
-
-#nav li:first-child {
-    width: 40px;
-}
-
-#nav li {
-    list-style: none;
-    float: left;
-    width: calc(100% - 40px);
-}
-
-#nav ul li ul {
-    height: 50px;
-    line-height: 50px;
-}
-
-#nav ul li ul li {
-    margin: 0 1%;
-    width: auto;
-}
-
-#nav ul li ul li:first-child {
-    width: auto;
-}
-
-#nav li ul li a {
-    display: block;
-    padding: 0 10px;
-}
-
-#nav li ul li:hover a {
-    color: #ff6030;
-}
-
-#nav #logo {
-    height: 40px;
-    margin: 5px 5px 5px 10px;
-}
-
-#burger {
-    display: none;
-}
-
-#nav a {
-    margin: 0;
-    color: white;
-    text-decoration: none;
-    font-weight: 900;
-}
-
-
-/*  ~~~~~ END NAVI ~~~~~ */
 
 
 /*  ~~~~~ MAIN CONTENT ~~~~~ */
@@ -162,6 +88,7 @@ a:focus {
 
 .content h3,
 .content h4 {
+    margin: 0.5rem 0;
     font-weight: 800;
 }
 
@@ -176,50 +103,12 @@ a:focus {
     background: #efefef;
 }
 
-.content figure {
-    margin: 0;
-    padding: 10px;
-    width: 100%;
-    border: 1px dashed #ff6030;
-}
-
-.content figcaption {
-    text-align: center;
-    font-size: 80%;
-    margin-top: 5px;
-    font-style: italic;
-}
-
-.content img {
-    width: 100%;
-}
-
-.content img.inline-img {
-    width: auto;
-}
-
 .content ul {
     padding-left: 15px;
 }
 
-.content .vita {
-    display: flex;
-    flex-direction: column;
-}
-
-.content .vita-content {
-    display: flex;
-    flex-direction: row;
-}
-
-.content .vita-content img {
-    flex: 0 0 auto;
-}
-
-.content .vita-content ul {
-    flex: 0 1 auto;
-    margin: 0 0 0 10px;
-    align-self: center;
+.content ul li {
+    margin-bottom: 0.5rem;
 }
 
 .content #formular fieldset {
@@ -302,12 +191,16 @@ a:focus {
 
 .content table {
     table-layout: fixed;
+    border-collapse: collapse;
     width: 200px;
+    margin-top: 2rem;
 }
 
 .content table td, th {
+    text-align: center;
     border: 1px solid black;
     width: 100px;
+    padding: 0.5rem;
 }
 
 
@@ -400,71 +293,12 @@ footer {
     clear: both;
 }
 
-
 /*  ~~~~~ END FOOTER ~~~~~ */
 
 
 /*  ~~~~~ MOBILE ~~~~~ */
 
 @media screen and (max-width:768px) {
-
-    /*  ~~~~~ NAVI MOBILE ~~~~~ */
-
-    #burger {
-        width: 40px;
-        height: 40px;
-        margin: 5px;
-        display: block;
-    }
-
-    #nav ul li:hover #burger path,
-    #burger:hover path {
-        fill: #ff6030;
-    }
-
-    #nav #menu-opener {
-        width: 50px;
-    }
-
-    #nav {
-        height: 50px;
-    }
-
-    #nav ul {
-        width: auto;
-    }
-
-    #nav ul li {
-        position: relative;
-        height: 100%;
-        line-height: 50px;
-    }
-
-    #nav li ul {
-        position: absolute;
-        top: 50px;
-        left: 0;
-        display: none;
-    }
-
-    #nav li:hover {
-        cursor: pointer;
-    }
-
-    #nav li:hover ul {
-        display: block;
-        background: #5382A1;
-        height: auto;
-    }
-
-    #nav li ul li {
-        height: auto;
-        line-height: 2;
-        float: none;
-        display: block;
-    }
-
-    /*  ~~~~~ END NAVI MOBILE ~~~~~ */
 
     /*  ~~~~~ HEADER MOBILE ~~~~~ */
 
@@ -474,24 +308,7 @@ footer {
 
     /*  ~~~~~ END HEADER MOBILE ~~~~~ */
 
-    /*  ~~~~~ CONTENT MOBILE ~~~~~ */
-
-    .content .vita {
-        display: block;
-    }
-
-    .content .vita-content {
-        display: block;
-    }
-
-    .content .vita-content ul {
-        margin: 10px 0;
-        padding-left: 15px;
-    }
-
-    /*  ~~~~~ END CONTENT MOBILE ~~~~~ */
 }
-
 
 /*  ~~~~~ END MOBILE ~~~~~  */
 
