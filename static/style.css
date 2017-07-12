@@ -32,7 +32,6 @@ a:focus {
     color: currentColor;
 }
 
-
 /*  ~~~~~ END SITE ~~~~~ */
 
 
@@ -68,7 +67,6 @@ a:focus {
 #header h2 {
     font-size: 3rem;
 }
-
 
 /*  ~~~~~ END HEADER ~~~~~ */
 
@@ -111,30 +109,34 @@ a:focus {
     margin-bottom: 0.5rem;
 }
 
-.content #formular fieldset {
-    border: 1px solid #ff6030;
-    margin: 20px auto;
-    padding: 20px;
+.content form{
+    display: inline;
 }
 
-.content #formular fieldset legend {
+.content .formular fieldset {
+    border: 1px solid #5382A1;
+    margin: 10px auto;
+    padding: 5px 15px;
+}
+
+.content .formular fieldset legend {
     padding: 0 5px;
 }
 
-.content #formular label,
-.content #formular input,
-.content #formular textarea {
-    display: block;
+.content .formular label,
+.content .formular input,
+.content .formular textarea {
+    display: inline;
+    margin-right: 5px;
 }
 
-.content #formular input {
+.content .formular input {
     margin-bottom: 10px;
 }
 
-.content #formular input[type="text"],
-.content #formular input[type="email"],
-.content #formular input[type="date"],
-.content #formular textarea {
+.content .formular input[type="text"],
+.content .formular input[type="date"],
+.content .formular textarea {
     border: 0;
     box-shadow: inset 0 0 2px 1px rgba(138, 138, 138, .5);
     width: 100%;
@@ -143,36 +145,17 @@ a:focus {
     padding: 5px 10px;
 }
 
-.content #formular textarea {
-    height: 200px;
+.content .formular textarea {
+    height: 50px;
 }
 
-.content #formular button {
+.content .formular button {
     margin-top: 20px;
     float: right;
 }
 
-.content #formular .gender {
-    width: 100%;
-}
-
-.content #formular .gender input,
-.content #formular .gender label {
-    float: left;
-    height: 30px;
-    line-height: 30px;
-}
-
-.content #formular .gender label {
-    padding-left: 5px;
-}
-
-.content #formular .gender label {
-    margin-right: 10px;
-}
-
-.content #formular input:focus,
-.content #formular textarea:focus {
+.content .formular input:focus,
+.content .formular textarea:focus {
     outline: #ff6030 auto 5px;
 }
 
@@ -180,108 +163,21 @@ a:focus {
     font-weight: 600;
 }
 
-.content ol {
-    display: block;
-    position: fixed;
-    left: 10px;
-    top: 44%;
-    width: 11rem;
-    margin: 0;
-}
-
 .content table {
     table-layout: fixed;
     border-collapse: collapse;
-    width: 200px;
-    margin-top: 2rem;
+    width: 100%;
+    margin-top: 1rem;
 }
 
 .content table td, th {
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid #5382A1;
     width: 100px;
     padding: 0.5rem;
 }
 
-
 /*  ~~~~~ END MAIN CONTENT ~~~~~ */
-
-/*  ~~~~~ JS STEIN, SCHERE, PAPIER ~~~~~  */
-.gamebox {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 50%;
-    min-width: 150px;
-    padding: 10px 15px;
-    margin: 25px auto 0 auto;
-    height: 100%;
-    border: 1px dashed #ff6030;
-    background: rgba(83, 130, 161, .2);
-}
-
-.gamebox button {
-    font-weight: 600;
-    width: 85px;
-    height: 30px;
-    margin: 5px 10px;
-}
-
-.gamebox button:hover {
-    background: rgba(83, 130, 161, .3);
-}
-
-.gamebox button:focus {
-    background: rgba(83, 130, 161, .7);
-    outline-color: rgba(255, 96, 48, 1);
-}
-
-.gamebox #start {
-    width: 110px;
-    height: 45px;
-    line-height: 1.3;
-    font-weight: 900;
-    color: white;
-    background: rgba(83, 130, 161, .7)
-}
-
-.gamebox #start:hover {
-    background: rgba(83, 130, 161, 1);
-}
-
-.gamebox #start:focus {
-    background: rgba(255, 96, 48, 1);
-    outline-color: rgba(83, 130, 161, 1);
-}
-
-.gamebox #choicebox,
-.gamebox #resultbox {
-    width: 90%;
-    height: 100%;
-    margin: 10px  auto;
-    padding: 10px 15px;
-    border: 1px dashed #ff6030;
-    background: rgba(83, 130, 161, .2);
-    font-weight: 600;
-    line-height: 1.5;
-    display: flex;
-    align-items: center;
-
-}
-
-.gamebox #resultbox {
-    min-height: 85px;
-}
-
-
-.gamebox #resultbox p {
-    width: 100%;
-    margin: 0 auto;
-}
-
-
-/*  ~~~~~ END JS STEIN, SCHERE, PAPIER ~~~~~  */
 
 
 /*  ~~~~~ FOOTER ~~~~~ */
@@ -311,15 +207,3 @@ footer {
 }
 
 /*  ~~~~~ END MOBILE ~~~~~  */
-
-
-/*  ~~~~~ 2ND NAV ~~~~~  */
-
-@media screen and (max-width:1100px) {
-    .content ol {
-        position: static;
-        padding-left: 23px;
-    }
-}
-
-/*  ~~~~~ END 2ND NAV ~~~~~  */
