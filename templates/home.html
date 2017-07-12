@@ -68,9 +68,9 @@
         <td> {{ entry.due }} </td>
         <td> {{ entry.date }} </td>
         <td><form action="/complete">
-            <input type="hidden" value="{{entry.done}}" name="done_to_complete">
+            <input type="hidden" value="{{entry.state}}" name="state_to_complete">
             <input type="hidden" value="{{entry.serial}}" name="serial_to_complete">
-            <input type="submit" value="{{entry.done}}">
+            <input type="submit" value="{{entry.state}}">
         </form>
         </td>
         <td><form action="/delete">
